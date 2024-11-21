@@ -21,149 +21,102 @@ Leggendo il testo della prova, che ci chiedeva di descrivere e analizzare un dat
 
 ## Tabelle in DDL
 
+```sql
 CREATE TABLE Titolo
-
 (
-
     ID_Titolo INT NOT NULL PRIMARY KEY IDENTITY,
-
     Nome VARCHAR(100) NOT NULL,
-
     Serie BOOLEAN NOT NULL
 )
+```
 
+```sql
 CREATE TABLE Contenuto
-
 (
-
     ID_Contenuto INT NOT NULL PRIMARY KEY IDENTITY,
-
     Stagione INT NOT NULL,
-
     Episodio INT NOT NULL,
-
     Titolo VARCHAR(100) NOT NULL,
-
     Link VARCHAR(100) NOT NULL,
-
     ID_Titolo INT NOT NULL FOREIGN KEY REFERENCES Titolo(ID_Titolo)
 )
+```
 
+```sql
 CREATE TABLE Utente
-
 (
-
     ID_Utente INT NOT NULL PRIMARY KEY IDENTITY,
-
     PasswordHash VARCHAR(100) NOT NULL,
-
     Username VARCHAR(100) NOT NULL,
-
     Email VARCHAR(100) NOT NULL,
-
 )
+```
 
 ## Query
 
 ### 1°
 
+```sql
 SELECT Nome 
-
 FROM Titolo
+```
 
 ### 2°
 
+```sql
 SELECT ID_Utente, Username
-
 FROM Utente
+```
 
 ### 3°
 
+```sql
 SELECT C.ID_Contenuto, C.Stagione, C.Episodio, C.Link, C.Titolo
-
 FROM Contenuto
-
 INNER JOIN Visualizzazione V ON (C.ID_Contenuto = V.ID_Contenuto)
-
 WHERE V.ID_Utente = <ID_Utente>
-
 ORDER BY V.Data ASC
+```
 
 ### 4°
 
+```sql
 SELECT TOP 3 V.ID_Utente, U.Username, COUNT(V.ID_Contenuto) AS ConteggioVisualizzazioni
-
-
 FROM Visualizzazione V
-
-
 INNER JOIN Utente U ON (V.ID_Utente = U.ID_Utente)
-
-
 GROUP BY V.ID_Utente, U.Username
-
-
 ORDER BY ConteggioVisualizzazioni DESC
+```
 
 ### 5°
 
+```sql
 SELECT U.ID_Utente, U.Username, C.ID_Contenuto, T.Nome AS Titolo
-
-
 FROM Visualizzazione V
-
-
 INNER JOIN Contenuto C ON (V.ID_Contenuto = C.ID_Contenuto)
-
-
 INNER JOIN Titolo T ON (C.ID_Titolo = T.ID_Titolo)
-
-
 INNER JOIN Utente U ON (V.ID_Utente = U.ID_Utente)
-
-
 WHERE V.Finito = 0;
+```
 
 ### 6°
 
+```sql
 SELECT V.Data, C.ID_Contenuto, C.Titolo, C.Stagione, C.Episodio, C.Link
-
-
 FROM Visualizzazione V
-
-
 INNER JOIN Contenuto C ON (V.ID_Contenuto = C.ID_Contenuto)
-
-
 WHERE V.ID_Utente = <ID_Utente>
-
-
 AND V.Data BETWEEN '<DataInizio>' AND '<DataFine>'
-
-
 ORDER BY V.Data ASC;
+```
 
 ### 7°
 
+```sql
 SELECT C.ID_Contenuto, T.Nome AS Titolo, C.Stagione, C.Episodio, COUNT(V.ID_Contenuto) AS NumeroVisualizzazioni
-
-
 FROM Visualizzazione V
-
-
 INNER JOIN Contenuto C ON (V.ID_Contenuto = C.ID_Contenuto)
-
-
 INNER JOIN Titolo T ON (C.ID_Titolo = T.ID_Titolo)
-
-
 GROUP BY C.ID_Contenuto, T.Nome, C.Stagione, C.Episodio
-
-
 ORDER BY NumeroVisualizzazioni DESC;
-
-
-
-
-
-
+```
