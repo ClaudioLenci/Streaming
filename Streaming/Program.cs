@@ -1,10 +1,12 @@
+using System.Data.SqlClient;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var databaseUrl = builder.Configuration.GetValue<string>("DatabaseUrl");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddSingleton(new SqlConnection(databaseUrl));
 
 var app = builder.Build();
 
