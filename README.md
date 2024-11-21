@@ -120,3 +120,13 @@ INNER JOIN Titolo T ON (C.ID_Titolo = T.ID_Titolo)
 GROUP BY C.ID_Contenuto, T.Nome, C.Stagione, C.Episodio
 ORDER BY NumeroVisualizzazioni DESC;
 ```
+
+### 8°
+
+```sql
+SELECT T.nome AS Titolo, C.Stagione, C.Episodio, C.Link, C.Titolo
+FROM Titolo T
+INNER JOIN Contenuto C ON (T.ID_Titolo = C.ID_Titolo)
+INNER JOIN Visualizzazione V ON (C.ID_Contenuto = V.ID_Contenuto)
+WHERE V.Data BETWEEN '<DataInizio>' AND '<DataFine>'
+```
