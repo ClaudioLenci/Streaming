@@ -63,3 +63,107 @@ CREATE TABLE Utente
 
 )
 
+## Query
+
+### 1°
+
+SELECT Nome 
+
+FROM Titolo
+
+### 2°
+
+SELECT ID_Utente, Username
+
+FROM Utente
+
+### 3°
+
+SELECT C.ID_Contenuto, C.Stagione, C.Episodio, C.Link, C.Titolo
+
+FROM Contenuto
+
+INNER JOIN Visualizzazione V ON (C.ID_Contenuto = V.ID_Contenuto)
+
+WHERE V.ID_Utente = <ID_Utente>
+
+ORDER BY V.Data ASC
+
+### 4°
+
+SELECT TOP 3 V.ID_Utente, U.Username, COUNT(V.ID_Contenuto) AS ConteggioVisualizzazioni
+
+
+FROM Visualizzazione V
+
+
+INNER JOIN Utente U ON (V.ID_Utente = U.ID_Utente)
+
+
+GROUP BY V.ID_Utente, U.Username
+
+
+ORDER BY ConteggioVisualizzazioni DESC
+
+### 5°
+
+SELECT U.ID_Utente, U.Username, C.ID_Contenuto, T.Nome AS Titolo
+
+
+FROM Visualizzazione V
+
+
+INNER JOIN Contenuto C ON (V.ID_Contenuto = C.ID_Contenuto)
+
+
+INNER JOIN Titolo T ON (C.ID_Titolo = T.ID_Titolo)
+
+
+INNER JOIN Utente U ON (V.ID_Utente = U.ID_Utente)
+
+
+WHERE V.Finito = 0;
+
+### 6°
+
+SELECT V.Data, C.ID_Contenuto, C.Titolo, C.Stagione, C.Episodio, C.Link
+
+
+FROM Visualizzazione V
+
+
+INNER JOIN Contenuto C ON (V.ID_Contenuto = C.ID_Contenuto)
+
+
+WHERE V.ID_Utente = <ID_Utente>
+
+
+AND V.Data BETWEEN '<DataInizio>' AND '<DataFine>'
+
+
+ORDER BY V.Data ASC;
+
+### 7°
+
+SELECT C.ID_Contenuto, T.Nome AS Titolo, C.Stagione, C.Episodio, COUNT(V.ID_Contenuto) AS NumeroVisualizzazioni
+
+
+FROM Visualizzazione V
+
+
+INNER JOIN Contenuto C ON (V.ID_Contenuto = C.ID_Contenuto)
+
+
+INNER JOIN Titolo T ON (C.ID_Titolo = T.ID_Titolo)
+
+
+GROUP BY C.ID_Contenuto, T.Nome, C.Stagione, C.Episodio
+
+
+ORDER BY NumeroVisualizzazioni DESC;
+
+
+
+
+
+
