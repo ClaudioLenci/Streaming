@@ -39,7 +39,6 @@ namespace Streaming.Controllers
             List<Contenuto> contenuti = db.Query<Contenuto>(
                 "SELECT ID_Contenuto, Stagione, Episodio, Titolo, Link " +
                 "FROM Contenuto JOIN Visualizzazione ON Contenuto.ID_Contenuto = Visualizzazione.ID_Contenuto " +
-                "GROUP BY Contenuto " +
                 $"WHERE ID_Utente = {idUtente} " +
                 $"ORDER BY [Data]")
                 .ToList();
@@ -51,7 +50,6 @@ namespace Streaming.Controllers
             List<Contenuto> contenuti = db.Query<Contenuto>(
                 "SELECT ID_Contenuto, Stagione, Episodio, Titolo, Link " +
                 "FROM Contenuto JOIN Visualizzazione ON Contenuto.ID_Contenuto = Visualizzazione.ID_Contenuto " +
-                "GROUP BY Contenuto " +
                 $"WHERE ID_Utente = {idUtente} AND [Data] >= {inizio} AND [Data] <= {fine} " +
                 "ORDER BY [Data]")
                 .ToList();
