@@ -33,5 +33,29 @@ namespace Streaming.Controllers
                 .ToList();
             return View(topContenuti);
         }
+
+        public IActionResult ContenutiUtente(int idUtente)
+        {
+            List<Contenuto> contenuti = db.Query<Contenuto>(
+                "SELECT ID_Contenuto, Stagione, Episodio, Titolo, Link " +
+                "FROM Contenuto JOIN Visualizzazione ON Contenuto.ID_Contenuto = Visualizzazione.ID_Contenuto " +
+                "GROUP BY Contenuto " +
+                $"WHERE ID_Utente = {idUtente} " +
+                $"ORDER BY [Data]")
+                .ToList();
+            return View(contenuti);
+        }
+
+        public IActionResult ContenutiUtente(int idUtente, DateOnly inizio, DateOnly fine)
+        {
+            List<Contenuto> contenuti = db.Query<Contenuto>(
+                "SELECT ID_Contenuto, Stagione, Episodio, Titolo, Link " +
+                "FROM Contenuto JOIN Visualizzazione ON Contenuto.ID_Contenuto = Visualizzazione.ID_Contenuto " +
+                "GROUP BY Contenuto " +
+                $"WHERE ID_Utente = {idUtente} AND [Data] >= {inizio} AND [Data] <= {fine} " +
+                "ORDER BY [Data]")
+                .ToList();
+            return View(contenuti);
+        }
     }
 }
