@@ -2,17 +2,13 @@
 
 ## Introduzione
 
-La prova assegnata ci chiedeva di descrivere e analizzare un database per la gestione di una piattaforma streaming per poi sviluppare un sito web in MVC. Leggendo il testo abbiamo per prima cosa individuato 4 entità e 3 relazioni a cui abbiamo integrato i rispettivi attributi. 
+La prova assegnata ci chiedeva di descrivere e analizzare un database per la gestione di una piattaforma streaming per poi sviluppare un'app web in ASP.NET che implementa il pattern MVC. Leggendo il testo abbiamo per prima cosa individuato 4 entità e 3 relazioni a cui abbiamo integrato i rispettivi attributi. 
 
 ### Entità 
 
 - <b> TITOLO </b>: riguarda i film e le serie tv disponibili sulla piattaforma e contiene il <b> nome </b> del contenuto di tipo string e un attributo booleano <b> serie </b> per indicare se l'oggetto da considerare è un film o una serie tv. La chiave primaria di <b> TITOLO </b> è <b> ID_titolo </b>.
 
-- <b> COMMENTO </b>: ha come attributi la <b> data </b> del commento di tipo date, il <b> voto </b> che viene dato dopo la visualizzazione e il <b> testo </b> del commento di tipo string. 
-
 - <b> UTENTE </b>: ha come chiave primaria <b> ID_utente </b> e contiene lo <b> username </b>, la <b> passwordHash </b> e l'<b> email </b> di tipo string. 
-
-- <b> VISUALIZZAZIONE </b>: ha come attributi la <b> data </b> di visualizzazione di tipo date e l'attributo booleano <b> finito </b> che specifica se la visualizzazione di un contenuto è terminata o meno.
 
 - <b> CONTENUTO </b>: la chiave primaria è <b> ID_contenuto </b> e gli attributi ad esso correlati sono <b> stagione </b> ed <b> episodio </b>di tipo int mentre <b> titolo </b> e <b> link </b> sono di tipo string.
 
@@ -20,9 +16,11 @@ La prova assegnata ci chiedeva di descrivere e analizzare un database per la ges
 
 - <b> APPARTIENE </b> (tra <b> TITOLO </b> e <b> CONTENUTO </b>): è una relazione di tipo <b> 1 a N </b> in quanto ad ogni cortometraggio appartengono uno o più contenuti, intesi come stagioni ed episodi, mentre questi contenuti sono univoci per ogni cortometraggio. Ad esempio mentre per una serie tv ci possono essere diverse stagioni con altrettanti episodi, un film ha una sola stagione e un unico episodio.
 
-- <b> VISUALIZZAZIONE </b> (tra <b> CONTENUTO </b> e <b> UTENTE </b>): è una relazione di tipo <b> N a N </b> in quanto un utente può visualizzare più contenuti e un contenuto può essere visualizzato da più utenti. 
+- <b> VISUALIZZAZIONE </b> (tra <b> CONTENUTO </b> e <b> UTENTE </b>): è una relazione di tipo <b> N a N </b> in quanto un utente può visualizzare più contenuti e un contenuto può essere visualizzato da più utenti. ha come attributi la <b> data </b> di visualizzazione di tipo date e l'attributo booleano <b> finito </b> che specifica se la visualizzazione di un contenuto è terminata o meno.
 
-- <b> COMMENTO </b> (tra <b> TITOLO </b> e <b> UTENTE </b>): è una relazione di tipo <b> N a N </b> in quanto un utente può commentare più contenuti e anche quest'ultimi possono essere commentati da più utenti, considerando però che il commento di un utente è univoco, quindi può commentare una sola volta un determinato film o una determinata serie tv.
+- <b> COMMENTO </b> (tra <b> TITOLO </b> e <b> UTENTE </b>): è una relazione di tipo <b> N a N </b> in quanto un utente può commentare più contenuti e anche quest'ultimi possono essere commentati da più utenti, considerando però che il commento di un utente è univoco, quindi può commentare una sola volta un determinato film o una determinata serie tv. ha come attributi la <b> data </b> del commento di tipo date, il <b> voto </b> che viene dato dopo la visualizzazione e il <b> testo </b> del commento di tipo string. 
+
+Abbiamo scelto di utilizzare l'entità <b> TITOLO </b> per gestire come un unico oggetto i film e le serie tv, quindi ognuno di questi elementi verrà indentificato con il proprio titolo e l'ID mentre per stabilire la loro natura (film o serie tv) verrà utilizzata la variabile booleana <b> serie </b>. Utilizzando questa entità abbiamo potuto gestire le eventuali informazioni riguardo questi oggetti (stagioni, episodi, link e titolo) con l'entità <b> CONTENUTO </b> che si riferisce
 
 ## Schema E-R
 
