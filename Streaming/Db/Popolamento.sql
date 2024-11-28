@@ -1,0 +1,63 @@
+INSERT INTO Titolo (Nome, Serie) 
+VALUES 
+('Titanic', 0),
+('Avengers: EndGame', 0),
+('Inception', 0),
+('Mission: Impossible - Fallout', 0),
+('Dune', 0),
+('Blade Runner 2049', 0),
+('Interstellar', 0),
+('Forrest Gump', 0),
+('The Shawshank Redemption', 0),
+('Joker', 0),
+('La La Land', 0),
+('Superbad', 0),
+('Get Out', 0),
+('A Quiet Place', 0),
+('Hereditary', 0),
+('Breaking Bad', 1),
+('The Sopranos', 1),
+('The Crown', 1),
+('Succession', 1),
+('Stranger Things', 1),
+('The Mandalorian', 1),
+('The Witcher', 1),
+('Game of Thrones', 1),
+('The Office (US)', 1),
+('Parks and Recreation', 1),
+('Brooklyn Nine-Nine', 1),
+('Ted Lasso', 1),
+('Dark', 1),
+('Mindhunter', 1),
+('Black Mirror', 1);
+
+INSERT INTO Utente (PasswordHash, Username, Email)
+VALUES
+('CiaoMondo123', 'mario.rossi', 'mario.rossi@email.it'),
+('Stella2024!', 'giulia.bianchi', 'mario.rossi@email.it'),
+('Passw0rd#', 'luca.verdi', 'mario.rossi@email.it'),
+('Sole&Luna22', 'anna.neri', 'mario.rossi@email.it'),
+('PizzaNapoli1', 'francesco.g', 'mario.rossi@email.it'),
+('Gatt0nero$', 'chiara.r', 'mario.rossi@email.it'),
+('1234M@tteo', 'matteo.b', 'mario.rossi@email.it'),
+('L1bri&Fiori', 'elisa.m', 'mario.rossi@email.it'),
+('Calc10Tifo#', 'davide.c', 'mario.rossi@email.it'),
+('Password?', 'sara.t', 'mario.rossi@email.it');
+
+INSERT INTO Contenuto (Stagione, Episodio, Titolo, Link, ID_Titolo)
+VALUES
+(NULL, NULL, 'Titanic', 'https://www.youtube.com/watch?v=h2YKckrS30U', 1),
+(NULL, NULL, 'Avengers: Endgame', ' https://www.youtube.com/watch?v=TcMBFSGVi1c', 1),
+(NULL, NULL, 'Inception', 'https://www.youtube.com/watch?v=YoHD9XEInc0', 1),
+(NULL, NULL, 'Mission: Impossible - Fallout', 'https://www.youtube.com/watch?v=wb49-oV0F78', 1),
+(NULL, NULL, 'Dune', 'https://www.youtube.com/watch?v=8g18jFHCLXk', 1),
+(NULL, NULL, 'Blade Runner 2049', 'https://www.youtube.com/watch?v=gCcx85zbxz4', 1),
+(NULL, NULL, 'Interstellar', 'https://www.youtube.com/watch?v=zSWdZVtXT7E', 1),
+(NULL, NULL, 'Forrest Gump', 'https://www.youtube.com/watch?v=bLvqoHBptjg', 1),
+(NULL, NULL, 'The Shawshank Redemption', 'https://www.youtube.com/watch?v=6hB3S9bIaco', 1),
+(NULL, NULL, 'Joker', 'https://www.youtube.com/watch?v=zAGVQLHvwOY', 1),
+(NULL, NULL, 'La la Land', ' https://www.youtube.com/watch?v=0pdqf4P9MB8', 1),
+(NULL, NULL, 'Superbad', 'https://www.youtube.com/watch?v=4EA3s3OZVJc', 1),
+(NULL, NULL, 'Get Out', 'https://www.youtube.com/watch?v=sRfnevzM9kQ', 1),
+(NULL, NULL, 'A Quiet Place', 'https://www.youtube.com/watch?v=WR7cc5t7tv8', 1),
+(NULL, NULL, 'Hereditary', 'https://www.youtube.com/watch?v=H6fPpYoG88I', 1);
