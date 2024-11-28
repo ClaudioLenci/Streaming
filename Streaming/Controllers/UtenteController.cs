@@ -59,6 +59,7 @@ namespace Streaming.Controllers
             }
             else
             {
+                TempData["Error"] = "Credenziali errate!";
                 return RedirectToAction("Login", "Utente");
             }
         }
