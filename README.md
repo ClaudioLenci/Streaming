@@ -20,7 +20,7 @@ La prova assegnata ci chiedeva di descrivere e analizzare un database per la ges
 
 - <b> COMMENTO </b> (tra <b> TITOLO </b> e <b> UTENTE </b>): è una relazione di tipo <b> N a N </b> in quanto un utente può commentare più contenuti e anche quest'ultimi possono essere commentati da più utenti, considerando però che il commento di un utente è univoco, quindi può commentare una sola volta un determinato film o una determinata serie tv. ha come attributi la <b> data </b> del commento di tipo date, il <b> voto </b> che viene dato dopo la visualizzazione e il <b> testo </b> del commento di tipo string. 
 
-Abbiamo scelto di utilizzare l'entità <b> TITOLO </b> per gestire come un unico oggetto i film e le serie tv, quindi ognuno di questi elementi verrà indentificato con il proprio titolo e l'ID mentre per stabilire la loro natura (film o serie tv) verrà utilizzata la variabile booleana <b> serie </b>. Utilizzando questa entità abbiamo potuto gestire le eventuali informazioni riguardo questi oggetti (stagioni, episodi, link e titolo) con l'entità <b> CONTENUTO </b> che si riferisce
+Abbiamo scelto di utilizzare l'entità <b> TITOLO </b> per gestire come un unico oggetto i film e le serie tv, quindi ognuno di questi elementi verrà indentificato con il proprio titolo e l'ID mentre per stabilire la loro natura (film o serie tv) verrà utilizzata la variabile booleana <b> serie </b>. Utilizzando questa entità abbiamo potuto gestire le eventuali informazioni riguardo questi oggetti (stagioni, episodi, link e titolo) con l'entità <b> CONTENUTO </b> 
 
 ## Schema E-R
 
@@ -73,31 +73,31 @@ CREATE TABLE Utente
 
 ## Query
 
-### 1°
+Tutti i contenuti disponibili sulla piattaforma (film e serie TV)
 
 ```sql
 SELECT Nome 
 FROM Titolo
 ```
 
-### 2°
+<b>Tutti gli utenti iscritti alla piattaforma</b>
 
 ```sql
 SELECT ID_Utente, Username
 FROM Utente
 ```
 
-### 3°
+Tutti i contenuti visualizzati da un utente specifico in ordine cronologico
 
 ```sql
 SELECT C.ID_Contenuto, C.Stagione, C.Episodio, C.Link, C.Titolo
-FROM Contenuto
+FROM Contenuto C
 INNER JOIN Visualizzazione V ON (C.ID_Contenuto = V.ID_Contenuto)
 WHERE V.ID_Utente = <ID_Utente>
 ORDER BY V.Data ASC
 ```
 
-### 4°
+Identificare i primi tre utenti che hanno visualizzato più contenuti
 
 ```sql
 SELECT TOP 3 V.ID_Utente, U.Username, COUNT(V.ID_Contenuto) AS ConteggioVisualizzazioni
@@ -107,7 +107,7 @@ GROUP BY V.ID_Utente, U.Username
 ORDER BY ConteggioVisualizzazioni DESC
 ```
 
-### 5°
+Elencare gli utenti che hanno in sospeso la visione di contenuti e i titoli di questi contenuti
 
 ```sql
 SELECT U.ID_Utente, U.Username, C.ID_Contenuto, T.Nome AS Titolo
@@ -118,7 +118,8 @@ INNER JOIN Utente U ON (V.ID_Utente = U.ID_Utente)
 WHERE V.Finito = 0;
 ```
 
-### 6°
+Mostrare lo storico dei contenuti visualizzati da un utente indicando un periodo
+specifico
 
 ```sql
 SELECT V.Data, C.ID_Contenuto, C.Titolo, C.Stagione, C.Episodio, C.Link
@@ -129,7 +130,7 @@ AND V.Data BETWEEN '<DataInizio>' AND '<DataFine>'
 ORDER BY V.Data ASC;
 ```
 
-### 7°
+Classifica dei contenuti più visualizzati sulla piattaforma
 
 ```sql
 SELECT C.ID_Contenuto, T.Nome AS Titolo, C.Stagione, C.Episodio, COUNT(V.ID_Contenuto) AS NumeroVisualizzazioni
@@ -140,7 +141,8 @@ GROUP BY C.ID_Contenuto, T.Nome, C.Stagione, C.Episodio
 ORDER BY NumeroVisualizzazioni DESC;
 ```
 
-### 8°
+Individuare i contenuti visualizzati da un utente con una durata superiore a una
+certa soglia di tempo
 
 ```sql
 SELECT T.nome AS Titolo, C.Stagione, C.Episodio, C.Link, C.Titolo
