@@ -1,0 +1,9 @@
+﻿@model List<Utente>
+
+@foreach(Utente user in Model)
+{
+    <div>
+        <h3>@user.Username</h3>
+        <h5>@user.Email</h5>
+    </div>
+}
