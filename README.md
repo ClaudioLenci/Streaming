@@ -6,7 +6,7 @@ La prova assegnata ci chiedeva di descrivere e analizzare un database per la ges
 
 ### Entità 
 
-- <b>Titolo</b>: rappresenta unicamente i film e le serie tv disponibili sulla piattaforma e contiene il <b>nome</b> del contenuto e un attributo booleano <b>serie</b> per indicare se l'oggetto da considerare è un film o una serie tv.
+- <b>Titolo</b>: rappresenta unicamente i film e le serie tv disponibili sulla piattaforma e contiene il <b>nome</b> del contenuto e un attributo booleano <b>serie</b> per indicare se l'oggetto da considerare è un film o una serie tv. Abbiamo scelto di utilizzare l'entità <b>Titolo</b> per gestire come un unico oggetto i film e le serie tv, dunque ognuno di questi elementi verrà indentificato tramite l'ID mentre per stabilire la loro natura (film o serie tv) verrà utilizzata la variabile booleana <b>serie</b>. Utilizzando questa entità abbiamo potuto gestire le eventuali informazioni di ognuno degli episodi dell'eventuale serie (stagione, episodio, link e titolo) con l'entità <b>Contenuto</b>.
 
 - <b>Utente</b>: entità per rappresentare l'utente. Ha come attributi l'<b>email</b>, lo <b>username</b>e il <b>passwordHash</b>. Quest'ultimo, per motivi di sicurezza, non memorizza direttamente la password, bensì il suo hash generato tramite l'algoritmo SHA256. 
 
@@ -14,13 +14,12 @@ La prova assegnata ci chiedeva di descrivere e analizzare un database per la ges
 
 ### Relazioni
 
-- <b> APPARTIENE </b> (tra <b> TITOLO </b> e <b> CONTENUTO </b>): è una relazione di tipo <b> 1 a N </b> in quanto ad ogni cortometraggio appartengono uno o più contenuti, intesi come stagioni ed episodi, mentre questi contenuti sono univoci per ogni cortometraggio. Ad esempio mentre per una serie tv ci possono essere diverse stagioni con altrettanti episodi, un film ha una sola stagione e un unico episodio.
+- <b>Appartiene</b>: relazione di cardinalità <i>1 a N</i> tra le entità <b>Titolo</b> e <b>Contenuto</b>. La cardinalità risulta essere <i>1 a N</i> in quanto ad ogni titolo cinematografico appartengono uno o più contenuti (rispettivamente film o serie), intesi come stagioni ed episodi. Inoltre, ogni contenuto apparterrà ad un solo titolo.
 
-- <b> VISUALIZZAZIONE </b> (tra <b> CONTENUTO </b> e <b> UTENTE </b>): è una relazione di tipo <b> N a N </b> in quanto un utente può visualizzare più contenuti e un contenuto può essere visualizzato da più utenti. ha come attributi la <b> data </b> di visualizzazione di tipo date e l'attributo booleano <b> finito </b> che specifica se la visualizzazione di un contenuto è terminata o meno.
+- <b>Visualizzazione</b>: relazione tra <b>Contenuto</b> e <b>Utente</b>. La cardinalità è <i>N a N</i>, in quanto un utente può visualizzare più contenuti e un contenuto può essere visualizzato da più utenti. Ha come attributi la <b>data</b> di visualizzazione e l'attributo booleano <b>finito</b> che specifica se la visualizzazione di un contenuto è terminata o meno.
 
-- <b> COMMENTO </b> (tra <b> TITOLO </b> e <b> UTENTE </b>): è una relazione di tipo <b> N a N </b> in quanto un utente può commentare più contenuti e anche quest'ultimi possono essere commentati da più utenti, considerando però che il commento di un utente è univoco, quindi può commentare una sola volta un determinato film o una determinata serie tv. ha come attributi la <b> data </b> del commento di tipo date, il <b> voto </b> che viene dato dopo la visualizzazione e il <b> testo </b> del commento di tipo string. 
+- <b>Commento</b>: relazione tra <b>Titolo</b> e <b>Utente</b>. La cardinalità è <i>N a N</i>, in quanto un utente può commentare più contenuti e anche questi ultimi possono essere commentati da più utenti. La tabella ricavata non conterrà alcuna chiave primaria in quanto si considera che il commento di un utente ad un contenuto è univoco (può commentare una sola volta un determinato film o una determinata serie tv). Ha come attributi la <b>data</b> del commento, il <b>voto</b> conferito dall'utente (tramite meccanismo delle stelle di qualità, da 1 a 5) e il <b>testo</b> del commento.
 
-Abbiamo scelto di utilizzare l'entità <b> TITOLO </b> per gestire come un unico oggetto i film e le serie tv, quindi ognuno di questi elementi verrà indentificato con il proprio titolo e l'ID mentre per stabilire la loro natura (film o serie tv) verrà utilizzata la variabile booleana <b> serie </b>. Utilizzando questa entità abbiamo potuto gestire le eventuali informazioni riguardo questi oggetti (stagioni, episodi, link e titolo) con l'entità <b> CONTENUTO </b> 
 
 ## Schema E-R
 
