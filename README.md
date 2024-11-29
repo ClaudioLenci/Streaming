@@ -2,15 +2,15 @@
 
 ## Introduzione
 
-La prova assegnata ci chiedeva di descrivere e analizzare un database per la gestione di una piattaforma streaming per poi sviluppare un'app web in ASP.NET che implementa il pattern MVC. Leggendo il testo abbiamo per prima cosa individuato 4 entità e 3 relazioni a cui abbiamo integrato i rispettivi attributi. 
+La prova assegnata ci chiedeva di descrivere e analizzare un database per la gestione di una piattaforma streaming per poi sviluppare un'app web in ASP.NET che implementa il pattern MVC. Leggendo il testo abbiamo per prima cosa individuato quattro entità e tre relazioni a cui abbiamo assegnato i rispettivi attributi. 
 
 ### Entità 
 
-- <b> TITOLO </b>: riguarda i film e le serie tv disponibili sulla piattaforma e contiene il <b> nome </b> del contenuto di tipo string e un attributo booleano <b> serie </b> per indicare se l'oggetto da considerare è un film o una serie tv. La chiave primaria di <b> TITOLO </b> è <b> ID_titolo </b>.
+- <b>Titolo</b>: rappresenta unicamente i film e le serie tv disponibili sulla piattaforma e contiene il <b>nome</b> del contenuto e un attributo booleano <b>serie</b> per indicare se l'oggetto da considerare è un film o una serie tv.
 
-- <b> UTENTE </b>: ha come chiave primaria <b> ID_utente </b> e contiene lo <b> username </b>, la <b> passwordHash </b> e l'<b> email </b> di tipo string. 
+- <b>Utente</b>: entità per rappresentare l'utente. Ha come attributi l'<b>email</b>, lo <b>username</b>e il <b>passwordHash</b>. Quest'ultimo, per motivi di sicurezza, non memorizza direttamente la password, bensì il suo hash generato tramite l'algoritmo SHA256. 
 
-- <b> CONTENUTO </b>: la chiave primaria è <b> ID_contenuto </b> e gli attributi ad esso correlati sono <b> stagione </b> ed <b> episodio </b>di tipo int mentre <b> titolo </b> e <b> link </b> sono di tipo string.
+- <b>Contenuto</b>: entità, derivata dalla risoluzione di una gerarchia, utilizzata per la rappresentazione di un singolo episodio di una serie o il contenuto proprio di un film. Gli attributi ad esso correlati sono <b>stagione</b>, <b>episodio</b> ed <b>titolo</b>(nulli nel caso di un film), e <b>link</b>, che contiene il link all'ipotetica CDN utilizzata per lo storing dei contenuti video.
 
 ### Relazioni
 
