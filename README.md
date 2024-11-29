@@ -40,7 +40,11 @@ Leggendo il testo abbiamo per prima cosa individuato quattro entità e tre relaz
   
 - Commento: Data, Testo, Voto, <u>ID_Utente (FK)</u>, <u>ID_Titolo (FK)</u>;
 
-## Tabelle in DDL
+## Queries
+
+Siccome è stato deciso di utilizzare Microsoft SQL Server come DBMS, si sono rese necessarie modifiche alle queries per la creazione del database e anche alle normali interrogazioni utilizzate nel programma. In particolare, per le queries di creazione non si è potuto utilizzare il tipo `BOOLEAN`, in quanto assente in tutte le versioni di SQL Server. Al suo posto è stato utilizzato il tipo `BIT`. Per quanto concerne, invece, le queries utilizzate nel programma, si sono dovute implementare, in alcuni casi, modifiche strutturali alla queries stesse e alla loro logica.
+
+### Creazione del database
 
 ```sql
 CREATE TABLE Titolo
@@ -94,7 +98,7 @@ CREATE TABLE  Commento
 );
 ```
 
-## Query
+### Interrogazioni del database
 
 Tutti i contenuti disponibili sulla piattaforma (film e serie TV)
 
@@ -103,7 +107,7 @@ SELECT Nome
 FROM Titolo
 ```
 
-<b>Tutti gli utenti iscritti alla piattaforma</b>
+Tutti gli utenti iscritti alla piattaforma
 
 ```sql
 SELECT ID_Utente, Username
