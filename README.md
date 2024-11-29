@@ -2,7 +2,11 @@
 
 ## Introduzione
 
-La prova assegnata ci chiedeva di descrivere e analizzare un database per la gestione di una piattaforma streaming per poi sviluppare un'app web in ASP.NET che implementa il pattern MVC. Leggendo il testo abbiamo per prima cosa individuato quattro entità e tre relazioni a cui abbiamo assegnato i rispettivi attributi. 
+La prova assegnata ci chiedeva di descrivere e analizzare un database per la gestione di una piattaforma streaming per poi sviluppare un'app web in ASP.NET che implementa il pattern MVC.
+
+## Descrizione della realtà e ipotesi aggiuntive
+
+Leggendo il testo abbiamo per prima cosa individuato quattro entità e tre relazioni a cui abbiamo assegnato i rispettivi attributi. 
 
 ### Entità 
 
@@ -19,7 +23,6 @@ La prova assegnata ci chiedeva di descrivere e analizzare un database per la ges
 - <b>Visualizzazione</b>: relazione tra <b>Contenuto</b> e <b>Utente</b>. La cardinalità è <i>N a N</i>, in quanto un utente può visualizzare più contenuti e un contenuto può essere visualizzato da più utenti. Ha come attributi la <b>data</b> di visualizzazione e l'attributo booleano <b>finito</b> che specifica se la visualizzazione di un contenuto è terminata o meno.
 
 - <b>Commento</b>: relazione tra <b>Titolo</b> e <b>Utente</b>. La cardinalità è <i>N a N</i>, in quanto un utente può commentare più contenuti e anche questi ultimi possono essere commentati da più utenti. La tabella ricavata non conterrà alcuna chiave primaria in quanto si considera che il commento di un utente ad un contenuto è univoco (può commentare una sola volta un determinato film o una determinata serie tv). Ha come attributi la <b>data</b> del commento, il <b>voto</b> conferito dall'utente (tramite meccanismo delle stelle di qualità, da 1 a 5) e il <b>testo</b> del commento.
-
 
 ## Schema E-R
 
@@ -43,8 +46,8 @@ La prova assegnata ci chiedeva di descrivere e analizzare un database per la ges
 CREATE TABLE Titolo
 (
     ID_Titolo INT NOT NULL PRIMARY KEY IDENTITY,
-    Nome VARCHAR(100) NOT NULL,
-    Serie BOOLEAN NOT NULL
+    Nome VARCHAR(255) NOT NULL,
+    Serie BIT NOT NULL
 )
 ```
 
@@ -52,10 +55,10 @@ CREATE TABLE Titolo
 CREATE TABLE Contenuto
 (
     ID_Contenuto INT NOT NULL PRIMARY KEY IDENTITY,
-    Stagione INT NOT NULL,
-    Episodio INT NOT NULL,
-    Titolo VARCHAR(100) NOT NULL,
-    Link VARCHAR(100) NOT NULL,
+    Stagione INT,
+    Episodio INT,
+    Titolo VARCHAR(255),
+    Link VARCHAR(1023) NOT NULL,
     ID_Titolo INT NOT NULL FOREIGN KEY REFERENCES Titolo(ID_Titolo)
 )
 ```
@@ -64,10 +67,31 @@ CREATE TABLE Contenuto
 CREATE TABLE Utente
 (
     ID_Utente INT NOT NULL PRIMARY KEY IDENTITY,
-    PasswordHash VARCHAR(100) NOT NULL,
-    Username VARCHAR(100) NOT NULL,
-    Email VARCHAR(100) NOT NULL,
+    PasswordHash VARCHAR(256) NOT NULL,
+    Username VARCHAR(63) NOT NULL,
+    Email VARCHAR(63) NOT NULL,
 )
+```
+
+```sql
+CREATE TABLE Visualizzazione
+(
+	ID_Utente INT NOT NULL FOREIGN KEY REFERENCES Utente(ID_Utente),
+	ID_Contenuto INT NOT NULL FOREIGN KEY REFERENCES Contenuto(ID_Contenuto),
+	[Data] DATE NOT NULL,
+	Finito BIT NOT NULL
+);
+```
+
+```sql
+CREATE TABLE  Commento
+(
+	ID_Utente INT NOT NULL FOREIGN KEY REFERENCES Utente(ID_Utente),
+	ID_Titolo INT NOT NULL FOREIGN KEY REFERENCES Titolo(ID_Titolo),
+	[Data] DATE NOT NULL,
+	Testo VARCHAR(1023) NOT NULL,
+	Voto INT NOT NULL
+);
 ```
 
 ## Query
