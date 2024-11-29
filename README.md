@@ -178,3 +178,13 @@ INNER JOIN Contenuto C ON (T.ID_Titolo = C.ID_Titolo)
 INNER JOIN Visualizzazione V ON (C.ID_Contenuto = V.ID_Contenuto)
 WHERE V.Data BETWEEN '<DataInizio>' AND '<DataFine>'
 ```
+
+## Infrastruttura
+
+L'ipotetica infrastruttura dell'applicazione si articolerà nei seguenti componenti:
+
+- Applicazione MVC
+- Database SQL Server
+- CDN
+
+[comment]: <> (Da finire)
