@@ -183,8 +183,9 @@ WHERE V.Data BETWEEN '<DataInizio>' AND '<DataFine>'
 
 L'ipotetica infrastruttura dell'applicazione si articolerà nei seguenti componenti:
 
-- Applicazione MVC
-- Database SQL Server
-- CDN
-
-[comment]: <> (Da finire)
+- <b>Applicazione MVC</b>: applicazione ASP.NET con pattern MVC. Verranno servite dunque delle pagine perlopiù statiche con il contenuto già popolato sul server. I controller in cui è divisa l'applicazione sono i seguenti:
+  - Controller per gli utenti
+  - Controller per i titoli
+  - Controller per i contenuti
+- <b>Database SQL Server</b>
+- <b>CDN</b>: servizio di content delivery utilizzato per la fruizione reattiva e veloce ondemand dei contenuti della piattaforma, che sarebbero altrimenti molto difficili da gestire e processare.
