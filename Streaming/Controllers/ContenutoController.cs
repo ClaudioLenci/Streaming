@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using Streaming.Models;
 using Dapper;
+using System.Text.RegularExpressions;
 
 namespace Streaming.Controllers
 {
@@ -21,17 +22,6 @@ namespace Streaming.Controllers
                 $"WHERE ID_Contenuto = {id}")
                 .First();
             return View(contenuto);
-        }
-
-        public IActionResult TopContenuti(int limit = 10)
-        {
-            List<Contenuto> topContenuti = db.Query<Contenuto>(
-                $"SELECT TOP {limit} ID_Contenuto, Stagione, Episodio, Titolo, Link " +
-                "FROM Contenuto JOIN Visualizzazione ON Contenuto.ID_Contenuto = Visualizzazione.ID_Contenuto " +
-                "GROUP BY ID_Contenuto " +
-                "ORDER BY COUNT(ID_Utente)")
-                .ToList();
-            return View(topContenuti);
         }
 
         public IActionResult ContenutiUtente(int idUtente, string? inizio = null, string? fine = null)

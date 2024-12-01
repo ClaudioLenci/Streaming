@@ -1,0 +1,58 @@
+﻿@model List<Titolo>
+
+<style>
+    .container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 1rem;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    .titolo-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .titolo-item {
+        padding: 1rem;
+        margin: 0.5rem 0;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .titolo-name {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #555;
+    }
+
+    .titolo-type {
+        font-size: 0.9rem;
+        color: #777;
+    }
+</style>
+
+<div class="container">
+    <h1>Top Movies & Series</h1>
+    <ul class="titolo-list">
+        @foreach (var titolo in Model)
+        {
+            <li class="titolo-item">
+                <span class="titolo-name">@titolo.Nome</span>
+                <span class="titolo-type">
+                    @(titolo.Serie ? "Serie" : "Film")
+                </span>
+            </li>
+        }
+    </ul>
+</div>

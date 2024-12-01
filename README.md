@@ -157,12 +157,12 @@ ORDER BY [Data]
 Classifica dei contenuti più visualizzati sulla piattaforma
 
 ```sql
-SELECT C.ID_Contenuto, T.Nome AS Titolo, C.Stagione, C.Episodio, COUNT(V.ID_Contenuto) AS NumeroVisualizzazioni
-FROM Visualizzazione V
-INNER JOIN Contenuto C ON (V.ID_Contenuto = C.ID_Contenuto)
-INNER JOIN Titolo T ON (C.ID_Titolo = T.ID_Titolo)
-GROUP BY C.ID_Contenuto, T.Nome, C.Stagione, C.Episodio
-ORDER BY NumeroVisualizzazioni DESC;
+SELECT TOP {limit} Titolo.ID_titolo, Nome, Serie
+FROM Titolo
+JOIN Contenuto ON Titolo.ID_titolo = Contenuto.ID_titolo
+JOIN Visualizzazione ON Contenuto.ID_Contenuto = Visualizzazione.ID_Contenuto
+GROUP BY ID_Titolo
+ORDER BY COUNT(ID_Utente)
 ```
 
 Individuare i contenuti visualizzati da un utente con una durata superiore a una
