@@ -1,0 +1,87 @@
+﻿@model List<Titolo>
+
+<style>
+    .content {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 10px;
+        background-color: #f4f4f9;
+        color: #333;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        margin: 30px;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .titolo-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        margin: 10px 0;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+        .titolo-card:hover {
+            background-color: #e6f7ff;
+        }
+
+    .titolo-name {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .titolo-type {
+        font-size: 14px;
+        color: #666;
+    }
+</style>
+
+<div class="content">
+    <h1>Benvenuto!</h1>
+    <div class="container">
+        <h2>Top Movies & Series</h2>
+
+        @if (Model != null && Model.Any())
+        {
+            foreach (var titolo in Model)
+            {
+                <div class="titolo-card">
+                    <div class="titolo-name">@titolo.Nome</div>
+                    <div class="titolo-type">
+                        @if (titolo.Serie)
+                        {
+                            <span>Series</span>
+                        }
+                        else
+                        {
+                            <span>Movie</span>
+                        }
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>No titles available at the moment.</p>
+        }
+    </div>
+</div>

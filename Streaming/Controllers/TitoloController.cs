@@ -48,5 +48,17 @@ namespace Streaming.Controllers
                 ).ToList();
             return View(titoli);
         }
+
+        public IActionResult Index()
+        {
+            List<Titolo> titoli = db.Query<Titolo>(
+                "SELECT TOP 10 Titolo.ID_titolo, Titolo.Nome, Titolo.Serie " +
+                "FROM Titolo " +
+                "JOIN Commento ON Titolo.ID_titolo = Commento.ID_Titolo " +
+                "GROUP BY Titolo.ID_titolo, Titolo.Nome, Titolo.Serie " +
+                "ORDER BY AVG(Commento.Voto)"
+                ).ToList();
+            return View(titoli);
+        }
     }
 }
