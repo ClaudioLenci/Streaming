@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Dapper;
+using Microsoft.AspNetCore.Mvc;
+using Streaming.Models;
 using System.Data.SqlClient;
 
 namespace Streaming.Controllers
@@ -12,9 +14,13 @@ namespace Streaming.Controllers
             db = _db;
         }
 
-        public IActionResult Index()
+        public IActionResult All()
         {
-            return View();
+            List<Titolo> contenuti = db.Query<Titolo>(
+                "SELECT * " +
+                "FROM Titolo"
+                ).ToList();
+            return View(contenuti);
         }
     }
 }

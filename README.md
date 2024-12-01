@@ -103,14 +103,14 @@ CREATE TABLE  Commento
 Tutti i contenuti disponibili sulla piattaforma (film e serie TV)
 
 ```sql
-SELECT Nome 
+SELECT * 
 FROM Titolo
 ```
 
 Tutti gli utenti iscritti alla piattaforma
 
 ```sql
-SELECT ID_Utente, Username
+SELECT *
 FROM Utente
 ```
 
