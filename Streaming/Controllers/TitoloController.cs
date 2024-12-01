@@ -35,5 +35,18 @@ namespace Streaming.Controllers
                 .ToList();
             return View(titoli);
         }
+
+        public IActionResult WatchTitoli(int idUtente, int giorni)
+        {
+            List<Titolo> titoli = db.Query<Titolo>("SELECT Titolo.ID_titolo, Titolo.Nome, Titolo.Serie " +
+                "FROM Visualizzazione " +
+                "JOIN Contenuto ON Visualizzazione.ID_Contenuto = Contenuto.ID_Contenuto " +
+                "JOIN Titolo ON Contenuto.ID_Titolo = Titolo.ID_Titolo " +
+                $"WHERE Visualizzazione.ID_Utente = {idUtente} " +
+                "GROUP BY Titolo.ID_Titolo, Titolo.Nome, Titolo.Serie " +
+                $"HAVING ABS(DATEDIFF(day, MAX(Visualizzazione.[Data]), MIN(Visualizzazione.[Data]))) >= {giorni}"
+                ).ToList();
+            return View(titoli);
+        }
     }
 }

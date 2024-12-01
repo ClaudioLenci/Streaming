@@ -31,13 +31,9 @@ Leggendo il testo abbiamo per prima cosa individuato quattro entità e tre relaz
 ## Schema Logico
 
 - Titolo: <u>ID_Titolo (PK)</u>, Nome, Serie;
-
 - Utente: <u>ID_Utente (PK)</u>, PasswordHash, Username, Email;
-
 - Contenuto: <u>ID_Contenuto (PK)</u>, Stagione, Episodio, Link, Titolo, , <u>ID_Titolo (FK)</u>;
-  
 - Visualizzazione: Data, Finito, <u>ID_Utente (PK)</u>, <u>ID_Contenuto (FK)</u>;
-  
 - Commento: Data, Testo, Voto, <u>ID_Utente (FK)</u>, <u>ID_Titolo (FK)</u>;
 
 ## Queries
@@ -168,11 +164,13 @@ Individuare i contenuti visualizzati da un utente con una durata superiore a una
 certa soglia di tempo
 
 ```sql
-SELECT T.nome AS Titolo, C.Stagione, C.Episodio, C.Link, C.Titolo
-FROM Titolo T
-INNER JOIN Contenuto C ON (T.ID_Titolo = C.ID_Titolo)
-INNER JOIN Visualizzazione V ON (C.ID_Contenuto = V.ID_Contenuto)
-WHERE V.Data BETWEEN '<DataInizio>' AND '<DataFine>'
+SELECT Titolo.ID_titolo, Titolo.Nome, Titolo.Serie
+FROM Visualizzazione
+JOIN Contenuto ON Visualizzazione.ID_Contenuto = Contenuto.ID_Contenuto
+JOIN Titolo ON Contenuto.ID_Titolo = Titolo.ID_Titolo
+WHERE Visualizzazione.ID_Utente = 1
+GROUP BY Titolo.ID_Titolo, Titolo.Nome, Titolo.Serie
+HAVING DATEDIFF(day, MAX(Visualizzazione.[Data]), MIN(Visualizzazione.[Data])) > 15
 ```
 
 ## Infrastruttura
