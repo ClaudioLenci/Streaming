@@ -1,9 +1,50 @@
 ﻿@model List<Utente>
 
-@foreach(Utente user in Model)
-{
-    <div>
-        <h3>@user.Username</h3>
-        <h5>@user.Email</h5>
-    </div>
-}
+<style>
+    .user-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 1rem;
+        justify-content: center;
+    }
+
+    .user-card {
+        background-color: #f5f5f5;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 1.5rem;
+        width: 250px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .user-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .user-username {
+        font-size: 1.5rem;
+        color: #333;
+        margin-bottom: 0.5rem;
+    }
+
+    .user-email {
+        font-size: 1rem;
+        color: #777;
+        margin: 0;
+    }
+
+</style>
+
+<div class="user-container">
+    @foreach (Utente user in Model)
+    {
+        <div class="user-card">
+            <h3 class="user-username">@user.Username</h3>
+            <h5 class="user-email">@user.Email</h5>
+        </div>
+    }
+</div>
