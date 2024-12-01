@@ -170,7 +170,7 @@ JOIN Contenuto ON Visualizzazione.ID_Contenuto = Contenuto.ID_Contenuto
 JOIN Titolo ON Contenuto.ID_Titolo = Titolo.ID_Titolo
 WHERE Visualizzazione.ID_Utente = 1
 GROUP BY Titolo.ID_Titolo, Titolo.Nome, Titolo.Serie
-HAVING DATEDIFF(day, MAX(Visualizzazione.[Data]), MIN(Visualizzazione.[Data])) > 15
+HAVING ABS(DATEDIFF(day, MAX(Visualizzazione.[Data]), MIN(Visualizzazione.[Data]))) >= 15
 ```
 
 ## Infrastruttura
