@@ -117,11 +117,10 @@ FROM Utente
 Tutti i contenuti visualizzati da un utente specifico in ordine cronologico
 
 ```sql
-SELECT C.ID_Contenuto, C.Stagione, C.Episodio, C.Link, C.Titolo
-FROM Contenuto C
-INNER JOIN Visualizzazione V ON (C.ID_Contenuto = V.ID_Contenuto)
-WHERE V.ID_Utente = <ID_Utente>
-ORDER BY V.Data ASC
+SELECT Contenuto.ID_Contenuto, Stagione, Episodio, Titolo, Link
+FROM Contenuto JOIN Visualizzazione ON Contenuto.ID_Contenuto = Visualizzazione.ID_Contenuto
+WHERE ID_Utente = 1
+ORDER BY [Data]
 ```
 
 Identificare i primi tre utenti che hanno visualizzato più contenuti
@@ -149,12 +148,10 @@ Mostrare lo storico dei contenuti visualizzati da un utente indicando un periodo
 specifico
 
 ```sql
-SELECT V.Data, C.ID_Contenuto, C.Titolo, C.Stagione, C.Episodio, C.Link
-FROM Visualizzazione V
-INNER JOIN Contenuto C ON (V.ID_Contenuto = C.ID_Contenuto)
-WHERE V.ID_Utente = <ID_Utente>
-AND V.Data BETWEEN '<DataInizio>' AND '<DataFine>'
-ORDER BY V.Data ASC;
+SELECT Contenuto.ID_Contenuto, Stagione, Episodio, Titolo, Link
+FROM Contenuto JOIN Visualizzazione ON Contenuto.ID_Contenuto = Visualizzazione.ID_Contenuto
+WHERE ID_Utente = 1 AND [Data] >= '2024-01-01' AND [Data] <= '2024-12-31' 
+ORDER BY [Data]
 ```
 
 Classifica dei contenuti più visualizzati sulla piattaforma

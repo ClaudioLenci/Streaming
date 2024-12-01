@@ -34,24 +34,15 @@ namespace Streaming.Controllers
             return View(topContenuti);
         }
 
-        public IActionResult ContenutiUtente(int idUtente)
+        public IActionResult ContenutiUtente(int idUtente, string? inizio = null, string? fine = null)
         {
+            DateOnly inizioDate = string.IsNullOrEmpty(inizio) ? DateOnly.MinValue : DateOnly.Parse(inizio);
+            DateOnly fineDate = string.IsNullOrEmpty(fine) ? DateOnly.MaxValue : DateOnly.Parse(fine);
             List<Contenuto> contenuti = db.Query<Contenuto>(
-                "SELECT ID_Contenuto, Stagione, Episodio, Titolo, Link " +
+                "SELECT Contenuto.ID_Contenuto, Stagione, Episodio, Titolo, Link " +
                 "FROM Contenuto JOIN Visualizzazione ON Contenuto.ID_Contenuto = Visualizzazione.ID_Contenuto " +
-                $"WHERE ID_Utente = {idUtente} " +
+                $"WHERE ID_Utente = {idUtente} AND [Data] >= '{inizioDate.ToString("yyyy-MM-dd")}' AND [Data] <= '{fineDate.ToString("yyyy-MM-dd")}' " +
                 $"ORDER BY [Data]")
-                .ToList();
-            return View(contenuti);
-        }
-
-        public IActionResult ContenutiUtente(int idUtente, DateOnly inizio, DateOnly fine)
-        {
-            List<Contenuto> contenuti = db.Query<Contenuto>(
-                "SELECT ID_Contenuto, Stagione, Episodio, Titolo, Link " +
-                "FROM Contenuto JOIN Visualizzazione ON Contenuto.ID_Contenuto = Visualizzazione.ID_Contenuto " +
-                $"WHERE ID_Utente = {idUtente} AND [Data] >= {inizio} AND [Data] <= {fine} " +
-                "ORDER BY [Data]")
                 .ToList();
             return View(contenuti);
         }

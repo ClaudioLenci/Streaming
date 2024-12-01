@@ -1,0 +1,64 @@
+﻿@model List<Contenuto>
+
+<style>
+    .container {
+        max-width: 800px;
+        margin: auto;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+    }
+
+    .content-item {
+        border-bottom: 1px solid #ddd;
+        padding: 1rem 0;
+    }
+
+        .content-item:last-child {
+            border-bottom: none;
+        }
+
+    .content-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #333;
+        margin: 0;
+    }
+
+    .content-details {
+        margin: 0.5rem 0 0;
+        color: #666;
+    }
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+</style>
+
+
+<div class="container">
+    <h1>Contenuti Visualizzati</h1>
+    @foreach (var contenuto in Model)
+    {
+        <div class="content-item">
+            <p class="content-title">
+                @contenuto.Titolo
+                @if (contenuto.Stagione != 0 && contenuto.Episodio != 0)
+                {
+                    <span style="font-size: 0.9rem; color: #999;">
+                        @($"S{@contenuto.Stagione}:E{@contenuto.Episodio}")
+                    </span>
+                }
+            </p>
+            <p class="content-details">
+                <a href="@contenuto.Link" target="_blank">View Content</a>
+            </p>
+        </div>
+    }
+</div>
