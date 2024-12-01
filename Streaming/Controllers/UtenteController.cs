@@ -77,7 +77,14 @@ namespace Streaming.Controllers
 
         public IActionResult Pending()
         {
-            return View();
+            List<UtenteContenuto> utentiContenuti = db.Query<UtenteContenuto>(
+                "SELECT Utente.ID_Utente, Utente.Username, Utente.Email, Contenuto.ID_Contenuto, Contenuto.Titolo " +
+                "FROM Utente " +
+                "JOIN Visualizzazione ON Utente.ID_Utente = Visualizzazione.ID_Utente " +
+                "JOIN Contenuto ON Visualizzazione.ID_Contenuto = Contenuto.ID_Contenuto " +
+                "WHERE Finito = 0;"
+                ).ToList();
+            return View(utentiContenuti);
         }
     }
 }

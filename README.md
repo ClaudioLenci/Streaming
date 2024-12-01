@@ -136,12 +136,11 @@ ORDER BY COUNT(ID_Contenuto) DESC
 Elencare gli utenti che hanno in sospeso la visione di contenuti e i titoli di questi contenuti
 
 ```sql
-SELECT U.ID_Utente, U.Username, C.ID_Contenuto, T.Nome AS Titolo
-FROM Visualizzazione V
-INNER JOIN Contenuto C ON (V.ID_Contenuto = C.ID_Contenuto)
-INNER JOIN Titolo T ON (C.ID_Titolo = T.ID_Titolo)
-INNER JOIN Utente U ON (V.ID_Utente = U.ID_Utente)
-WHERE V.Finito = 0;
+SELECT Utente.ID_Utente, Utente.Username, Utente.Email, Contenuto.ID_Contenuto, Contenuto.Titolo
+FROM Utente
+JOIN Visualizzazione ON Utente.ID_Utente = Visualizzazione.ID_Utente
+JOIN Contenuto ON Visualizzazione.ID_Contenuto = Contenuto.ID_Contenuto
+WHERE Finito = 0;
 ```
 
 Mostrare lo storico dei contenuti visualizzati da un utente indicando un periodo

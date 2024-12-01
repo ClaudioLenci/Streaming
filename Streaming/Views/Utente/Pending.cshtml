@@ -1,0 +1,67 @@
+﻿@model List<UtenteContenuto>
+
+<style>
+    .container {
+        max-width: 1200px;
+        margin: 30px auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f1f1f1;
+        color: #555;
+    }
+
+    tr:hover {
+        background-color: #f9f9f9;
+    }
+
+    .no-data {
+        text-align: center;
+        color: #888;
+        padding: 20px;
+    }
+</style>
+
+<div class="container">
+    <h1>Contenuti in sospeso</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Contenuto</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Username</td>
+                    <td>@item.Email</td>
+                    <td>@item.Titolo</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
