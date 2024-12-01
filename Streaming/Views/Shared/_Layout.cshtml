@@ -20,10 +20,28 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Utente" asp-action="All">Utenti</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Titolo" asp-action="All">Titoli</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Contenuto" asp-action="ContenutiUtente" asp-route-idUtente="1">Contenuti Utente</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Utente" asp-action="TopUtenti">Top Utenti</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Utente" asp-action="Pending">Visioni sospese</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Contenuto" asp-action="ContenutiUtente" asp-route-idUtente="1" asp-route-inizio="1/11/2024" asp-route-fine="15/11/2024">Storico Contenuti</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Titolo" asp-action="TopTitoli">Top Titoli</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Titolo" asp-action="WatchTitoli" asp-route-idUtente="1" asp-route-giorni="10">Titoli in diversi giorni</a>
                         </li>
                     </ul>
                 </div>
