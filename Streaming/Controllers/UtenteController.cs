@@ -64,6 +64,17 @@ namespace Streaming.Controllers
             }
         }
 
+        public IActionResult TopUtenti(int limit = 3)
+        {
+            List<Utente> utenti = db.Query<Utente>($"SELECT TOP {limit} Utente.ID_Utente, Utente.Username, Utente.Email " +
+                "FROM Utente " +
+                "JOIN Visualizzazione ON Utente.ID_Utente = Visualizzazione.ID_Utente " +
+                "GROUP BY Utente.ID_Utente, Utente.Username, Utente.Email " +
+                "ORDER BY COUNT(ID_Contenuto) DESC"
+                ).ToList();
+            return View(utenti);
+        }
+
         public IActionResult Pending()
         {
             return View();

@@ -126,11 +126,11 @@ ORDER BY [Data]
 Identificare i primi tre utenti che hanno visualizzato più contenuti
 
 ```sql
-SELECT TOP 3 V.ID_Utente, U.Username, COUNT(V.ID_Contenuto) AS ConteggioVisualizzazioni
-FROM Visualizzazione V
-INNER JOIN Utente U ON (V.ID_Utente = U.ID_Utente)
-GROUP BY V.ID_Utente, U.Username
-ORDER BY ConteggioVisualizzazioni DESC
+SELECT TOP 3 Utente.ID_Utente, Utente.Username, Utente.Email
+FROM Utente
+JOIN Visualizzazione ON Utente.ID_Utente = Visualizzazione.ID_Utente
+GROUP BY Utente.ID_Utente, Utente.Username, Utente.Email
+ORDER BY COUNT(ID_Contenuto) DESC
 ```
 
 Elencare gli utenti che hanno in sospeso la visione di contenuti e i titoli di questi contenuti
