@@ -183,3 +183,11 @@ L'ipotetica infrastruttura dell'applicazione si articolerà nei seguenti compone
   - Controller per i contenuti
 - <b>Database SQL Server</b>
 - <b>CDN</b>: servizio di content delivery utilizzato per la fruizione reattiva e veloce ondemand dei contenuti della piattaforma, che sarebbero altrimenti molto difficili da gestire e processare.
+
+## Organizzazione del lavoro
+
+Il lavoro è stato suddiviso nel seguente modo:
+- Claudio si è occupato della creazione dell'applicazione web e del database
+- Cristian si è occupato della relazione e della presentazione, oltre ad aver aiutato Claudio con le queries di creazione e popolamento del database
+
+Inoltre, abbiamo utilizzato git per il controllo versione del codice sorgente.
